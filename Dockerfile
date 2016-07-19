@@ -12,8 +12,7 @@ RUN apt-get update && apt-get install -y \
 
 RUN curl -sS https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer \
-    && chmod a+x /usr/local/bin/composer \
-    && composer global require fxp/composer-asset-plugin:^1.1.4
+    && chmod a+x /usr/local/bin/composer
 
 RUN rm -rf /var/cache/apk/* && rm -rf /tmp/*
 
