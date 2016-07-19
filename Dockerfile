@@ -10,6 +10,11 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd
 
+RUN curl -sS https://getcomposer.org/installer | php \
+    && mv composer.phar /usr/local/bin/composer \
+    && chmod a+x /usr/local/bin/composer \
+    && composer global require fxp/composer-asset-plugin:^1.1.4 \
+
 RUN rm -rf /var/cache/apk/* && rm -rf /tmp/*
 
 CMD ["php-fpm", "-F"]
