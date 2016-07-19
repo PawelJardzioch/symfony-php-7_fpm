@@ -10,6 +10,8 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd
 
-CMD /usr/sbin/php-fpm7.0 -F -O 2>&1 | sed -u 's,.*: \"\(.*\)$,\1,'| sed -u 's,"$,,' 1>&1
+RUN rm -rf /var/cache/apk/* && rm -rf /tmp/*
+
+CMD ["php-fpm", "-F"]
 
 EXPOSE 9000
