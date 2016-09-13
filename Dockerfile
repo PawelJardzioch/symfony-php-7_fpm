@@ -38,6 +38,8 @@ RUN curl -sS https://getcomposer.org/installer | php \
 
 RUN rm -rf /var/cache/apk/* && rm -rf /tmp/*
 
+WORKDIR /var/www/symfony
+
 CMD ["php-fpm", "-F"]
 
 EXPOSE 9000
