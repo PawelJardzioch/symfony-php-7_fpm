@@ -31,11 +31,6 @@ RUN curl -fsSL 'https://xdebug.org/files/xdebug-2.4.0.tgz' -o xdebug.tar.gz \
     && rm -r xdebug \
     && docker-php-ext-enable xdebug
 
-# Install composer
-RUN curl -sS https://getcomposer.org/installer | php \
-    && mv composer.phar /usr/local/bin/composer \
-    && chmod a+x /usr/local/bin/composer
-
 RUN rm -rf /var/cache/apk/* && rm -rf /tmp/*
 
 WORKDIR /var/www/symfony
