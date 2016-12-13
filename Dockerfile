@@ -1,4 +1,4 @@
-FROM php:7-fpm
+FROM php:7.1-fpm
 MAINTAINER carriera
 
 # Install php extensions
@@ -17,7 +17,7 @@ RUN apt-get install -y git unzip && \
     rm -rf /var/lib/apt/lists/*
 
 # Install Xdebug
-RUN curl -fsSL 'https://xdebug.org/files/xdebug-2.4.0.tgz' -o xdebug.tar.gz \
+RUN curl -fsSL 'https://xdebug.org/files/xdebug-2.5.0.tgz' -o xdebug.tar.gz \
     && mkdir -p xdebug \
     && tar -xf xdebug.tar.gz -C xdebug --strip-components=1 \
     && rm xdebug.tar.gz \
@@ -30,6 +30,11 @@ RUN curl -fsSL 'https://xdebug.org/files/xdebug-2.4.0.tgz' -o xdebug.tar.gz \
     ) \
     && rm -r xdebug \
     && docker-php-ext-enable xdebug
+
+# Install composer
+RUN curl -sS https://getcomposer.org/installer | php \
+    && mv composer.phar /usr/local/bin/composer \
+    && chmod a+x /usr/local/bin/composer
 
 RUN rm -rf /var/cache/apk/* && rm -rf /tmp/*
 
