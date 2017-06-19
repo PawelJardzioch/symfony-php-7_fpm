@@ -15,7 +15,11 @@ RUN apt-get update && apt-get install -y \
 RUN apt-get install -y git unzip && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-
+    
+# Install zip-extension
+RUN apt-get update && apt-get install -y zlib1g-dev \
+    && docker-php-ext-install zip
+    
 # Install Xdebug
 RUN curl -fsSL 'https://xdebug.org/files/xdebug-2.5.0.tgz' -o xdebug.tar.gz \
     && mkdir -p xdebug \
